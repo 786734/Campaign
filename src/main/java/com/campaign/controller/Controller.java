@@ -2,6 +2,8 @@ package com.campaign.controller;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,17 +25,20 @@ public class Controller {
 	CampaignService campaignService;
 
 	@PostMapping
+    @RolesAllowed("ADMIN")
 	public Response addCampaign(@RequestBody PostRequest client) {
 	    return campaignService.addCampaign(client);
 	}   
 	
 	@PutMapping
+    @RolesAllowed("ADMIN")
 	public Response updateCampaign(@RequestBody PostRequest client) {
 	    return campaignService.updateCampaign(client);
 	}
 	
 	@GetMapping
-	public List<CampaignDetail> updateCampaign(@RequestParam("clientName") String clientName) {
+	@RolesAllowed({"ADMIN","USER"})
+	public List<CampaignDetail> getCampaign(@RequestParam("clientName") String clientName) {
 	    return campaignService.getCampaignList(clientName);
 	}
 	
