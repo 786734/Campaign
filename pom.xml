@@ -21,7 +21,8 @@
 		  <sonar.projectKey>786734_Campaign</sonar.projectKey>
 		  <sonar.organization>786734</sonar.organization>
 		  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		  
+		   <sonar.exclusions>pom.xml</sonar.exclusions>
+		   <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
 	</properties>
 	<dependencies>
 		<dependency>
