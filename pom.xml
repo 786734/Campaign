@@ -21,8 +21,10 @@
 		  <sonar.projectKey>786734_Campaign</sonar.projectKey>
 		  <sonar.organization>786734</sonar.organization>
 		  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		   <sonar.exclusions>pom.xml</sonar.exclusions>
+		   <sonar.exclusions>pom.xml,src/main/java/com/campaign/config/*
+		   </sonar.exclusions>
 		   <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
+		   <SONAR_TOKEN>b6e29a376c14ebbe8e69a5d692a5872223ff7901</SONAR_TOKEN>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -54,14 +56,24 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
+		
+		<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.12</version>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>org.mockito</groupId>
+    <artifactId>mockito-core</artifactId>
+    <version>2.15.0</version>
+</dependency>
+<dependency>
+    <groupId>org.mockito</groupId>
+    <artifactId>mockito-inline</artifactId>
+    <version>2.15.0</version>
+</dependency>
 		
 	</dependencies>
 	<dependencyManagement>
@@ -85,6 +97,7 @@
 			<plugin>
 				<groupId>org.sonarsource.scanner.maven</groupId>
 				<artifactId>sonar-maven-plugin</artifactId>
+				
 				<version>3.3.0.603</version>
 				<executions>
 				<execution>
@@ -95,6 +108,28 @@
 				</execution>
 				</executions>
 			</plugin>
+			
+			<plugin>
+	<groupId>org.jacoco</groupId>
+	<artifactId>jacoco-maven-plugin</artifactId>
+	<version>0.8.2</version>
+	<executions>
+		<execution>
+			<goals>
+				<goal>prepare-agent</goal>
+			</goals>
+		</execution>
+		<!-- attached to Maven test phase -->
+		<execution>
+			<id>report</id>
+			<phase>test</phase>
+			<goals>
+				<goal>report</goal>
+			</goals>
+		</execution>
+	</executions>
+</plugin>
+
 		</plugins>
 	</build>
 	

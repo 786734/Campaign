@@ -13,7 +13,7 @@ import com.campaign.model.PostRequest;
 public class Validator {
 
 	public Map<String, String> validateAddCampaignFieldValues(PostRequest request) {
-		Map<String,String> map = new HashMap<String, String>();
+		Map<String,String> map = new HashMap<>();
 		LocalDate effectiveDate = null;
 		LocalDate endDate = null;
 		
@@ -29,10 +29,9 @@ public class Validator {
 		if(!isEndDateNull)
 			endDate = validateDateFormate(Constants.END_DATE,request.getEndDate(),map);
 		
-		if(effectiveDate !=  null && endDate != null) {
-			//JAVA 8 Feature
-			if(effectiveDate.isAfter(endDate))
-				map.put(Constants.EFFECTIVE_DATE, Constants.DATE_RANGE_ERROR);
+		//JAVA 8 Feature
+		if(effectiveDate !=  null && endDate != null && effectiveDate.isAfter(endDate)) {
+			map.put(Constants.EFFECTIVE_DATE, Constants.DATE_RANGE_ERROR);
 		}
 		return  map;
 	}
@@ -61,25 +60,21 @@ public class Validator {
 
 
 	public Map<String, String> validateUpdateCampaignFieldValues(PostRequest request) {
-		Map<String,String> map = new HashMap<String, String>();
+		Map<String,String> map = new HashMap<>();
 		LocalDate effectiveDate = null;
 		LocalDate endDate = null;
 		
 		asserNotNull(Constants.CLIENT_NAME,request.getClientName(),map);
 		asserNotNull(Constants.CAMPAIGN_NAME,request.getCampaignName(),map);
 		
-		//boolean isEffectiveDateNull = asserNotNull(Constants.EFFECTIVE_DATE,request.getEffectiveDate(),map);
-		
 		if(!StringUtils.isEmpty(request.getEffectiveDate()))
 			effectiveDate = validateDateFormate(Constants.EFFECTIVE_DATE,request.getEffectiveDate(),map);
 		
-		//boolean isEndDateNull = asserNotNull(Constants.END_DATE,request.getEndDate(),map);
 		if(!StringUtils.isEmpty(request.getEffectiveDate()))
 			endDate = validateDateFormate(Constants.END_DATE,request.getEndDate(),map);
 		
-		if(effectiveDate !=  null && endDate != null) {
-			//JAVA 8 Feature
-			if(effectiveDate.isAfter(endDate))
+		//JAVA 8 Feature
+		if(effectiveDate !=  null && endDate != null && effectiveDate.isAfter(endDate)) {
 				map.put(Constants.EFFECTIVE_DATE, Constants.DATE_RANGE_ERROR);
 		}
 		return  map;

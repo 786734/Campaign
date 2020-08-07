@@ -23,8 +23,15 @@ public class Constants {
 	public static final String CAMPAIGN_DESCRIPTION = "campaignDescription";
 	public static final String EFFECTIVE_DATE = "effectiveDate";
 	public static final String END_DATE = "endDate";
+	public static final String ADMIN = "ADMIN";
+	public static final String USER = "USER";
+	public static final String DIALECT = "hibernate.dialect";
+	
 	
 	public static final String DATE_RANGE_ERROR = "Effective Date should be always earlier than EndDate";
 	public static final String DATE_FORMAT_ERROR = "Invalid date format. Please provide date in dd-MM-yyyy format";
 	
+	private Constants() {
+		
+	}
 }

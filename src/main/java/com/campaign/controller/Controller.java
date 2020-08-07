@@ -41,6 +41,10 @@ public class Controller {
 	public List<CampaignDetail> getCampaign(@RequestParam("clientName") String clientName) {
 	    return campaignService.getCampaignList(clientName);
 	}
+
+	public void setCampaignService(CampaignService campaignService) {
+		this.campaignService = campaignService;
+	}
 	
 	
 }

@@ -54,7 +54,7 @@ public class CampaignServiceImpl implements CampaignService {
 		}else {
 			LocalDate currentDate = LocalDate.now();
 			
-			if(!(client.getEffectiveDate().isBefore(currentDate) && client.getEndDate().isAfter(currentDate)))
+			if(client != null && !(client.getEffectiveDate().isBefore(currentDate) && client.getEndDate().isAfter(currentDate)))
 				error.put(Constants.CLIENT, Constants.CLIENT_INACTIVE);
 			if(!error.isEmpty())
 				return exceptionHandler.throwBadRequest(error);
@@ -118,8 +118,8 @@ public class CampaignServiceImpl implements CampaignService {
 	@Override
 	public List<CampaignDetail> getCampaignList(String clientName) {
 		
-		List<CampaignDetail> campaignDetailList = new ArrayList<CampaignDetail>();
-		List<CampaignDetail> sortedList = new ArrayList<CampaignDetail>();
+		List<CampaignDetail> campaignDetailList = new ArrayList<>();
+		List<CampaignDetail> sortedList = new ArrayList<>();
 		List<Campaign> list = campaignRepository.findByClientName(clientName);
 		
 		if(!CollectionUtils.isEmpty(list)) {
@@ -143,6 +143,22 @@ public class CampaignServiceImpl implements CampaignService {
 		
 		
 		return sortedList;
+	}
+
+	public void setCampaignRepository(CampaignRepository campaignRepository) {
+		this.campaignRepository = campaignRepository;
+	}
+
+	public void setClientRepository(ClientRepository clientRepository) {
+		this.clientRepository = clientRepository;
+	}
+
+	public void setValidator(Validator validator) {
+		this.validator = validator;
+	}
+
+	public void setExceptionHandler(ExceptionHandler exceptionHandler) {
+		this.exceptionHandler = exceptionHandler;
 	}
 
 }
